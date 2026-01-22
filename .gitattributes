@@ -1,0 +1,9 @@
+* text=auto
+*.svg text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+.github/** text eol=lf
+.vscode/** text eol=lf

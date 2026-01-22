@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="100%" height="100%" fill="#111827" />
-  <g transform="translate(80,120)">
-    <circle cx="176" cy="56" r="56" fill="#FB923C" />
-    <text x="280" y="76" font-family="Arial, Helvetica, sans-serif" font-size="72" fill="#ffffff">CareerSpark</text>
-    <text x="0" y="160" font-family="Arial, Helvetica, sans-serif" font-size="36" fill="#9CA3AF">Find Jobs • Hire Talent • Grow Your Career</text>
-  </g>
-</svg>
