@@ -1,37 +1,37 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Briefcase, Mail, Lock, ArrowLeft } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const { signIn, loading } = useAuth();
+  const { login } = useApp();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState<'seeker' | 'provider'>('seeker');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters');
       return;
     }
 
-    const { data, error } = await signIn(email, password);
-    if (error) {
+    const success = login(email, password, userType);
+    if (success) {
+      toast.success('Login successful!');
+      navigate(userType === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider');
+    } else {
       toast.error('Login failed. Please check your credentials.');
-      console.error(error);
-      return;
     }
-
-    toast.success('Login successful!');
-    navigate(userType === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
+      <Seo title="Log In" description="Log in to your CareerSpark account to apply for jobs, manage applications, and more." />
       <div className="max-w-md w-full">
         {/* Back to Home */}
         <Link

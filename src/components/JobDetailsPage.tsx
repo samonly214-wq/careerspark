@@ -13,10 +13,14 @@ export function JobDetailsPage() {
 
   const job = jobs.find(j => j.id === id);
 
+  // SEO: set page title/description dynamically once job is loaded
+  const jobDescription = job ? job.description.substring(0, 160) : undefined;
+
   if (!job) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header />
+        <Seo title="Job Not Found" description="Job not found - browse other available jobs on CareerSpark." />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <h1 className="text-3xl text-black mb-4">Job Not Found</h1>
@@ -62,6 +66,7 @@ export function JobDetailsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title={job.title} description={jobDescription} og={{ title: job.title, description: jobDescription }} />
       <Header />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

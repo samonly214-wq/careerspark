@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner@2.0.3';
 import { AppProvider } from './contexts/AppContext';
-import { ProtectedRoute } from './components/ProtectedRoute';
 import { HomePage } from './components/HomePage';
 import { LoginPage } from './components/LoginPage';
 import { SignUpPage } from './components/SignUpPage';
@@ -32,20 +31,14 @@ export default function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/job/:id" element={<JobDetailsPage />} />
           <Route path="/browse-jobs" element={<BrowseJobsPage />} />
-          <Route
-            path="/dashboard-seeker"
-            element={<ProtectedRoute role="seeker"><DashboardSeekerPage /></ProtectedRoute>}
-          />
-          <Route
-            path="/dashboard-provider"
-            element={<ProtectedRoute role="employer"><DashboardProviderPage /></ProtectedRoute>}
-          />
+          <Route path="/dashboard-seeker" element={<DashboardSeekerPage />} />
+          <Route path="/dashboard-provider" element={<DashboardProviderPage />} />
           <Route path="/post-job" element={<PostJobPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/messages" element={<MessagesPage />} />
-          <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />

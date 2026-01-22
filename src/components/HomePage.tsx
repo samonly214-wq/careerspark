@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Briefcase, MapPin, DollarSign, Building2, Clock, Bookmark } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,6 +32,7 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo title="Home" description="Search thousands of jobs, connect with top employers, and find the right opportunity for your career." />
       {/* Header */}
       <header className="bg-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

@@ -1,5 +1,6 @@
 import { Header } from './Header';
 import { Check, Briefcase } from 'lucide-react';
+import { Seo } from './Seo';
 
 export function PricingPage() {
   const plans = [
@@ -58,6 +59,7 @@ export function PricingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Pricing" description="Flexible, transparent pricing plans for employers. Choose the right plan for your hiring needs." />
       <Header />
 
       {/* Hero Section */}

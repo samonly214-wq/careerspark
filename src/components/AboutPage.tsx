@@ -1,5 +1,6 @@
 import { Header } from './Header';
 import { Users, Target, Award, Heart, Briefcase } from 'lucide-react';
+import { Seo } from './Seo';
 
 export function AboutPage() {
   const values = [
@@ -36,6 +37,7 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Seo title="About Us" description="Learn about CareerSpark's mission, values, and team — connecting talent with opportunity since 2020." />
       <Header />
 
       {/* Hero Section */}

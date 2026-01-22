@@ -1,16 +1,5 @@
-node_modules/
-build/
-dist/
+node_modules
+
+# Local environment files (do not commit secrets)
 .env
 .env.*
-.DS_Store
-/.vite
-/.idea
-/.vscode
-npm-debug.log*
-yarn-error.log*
-package-lock.json
-pnpm-lock.yaml
-/.vercel/
-/*.local
-*.local

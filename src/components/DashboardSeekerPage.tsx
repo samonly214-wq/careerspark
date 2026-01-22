@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Briefcase, BookmarkCheck, FileText, User, Bell, TrendingUp, Calendar, Trash2, MapPin, DollarSign } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function DashboardSeekerPage() {
   const { applications, savedJobs, jobs, deleteApplication, toggleSaveJob } = useApp();
@@ -22,6 +23,7 @@ export function DashboardSeekerPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Job Seeker Dashboard" noindex description="Private job seeker dashboard — not indexable." />
       <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

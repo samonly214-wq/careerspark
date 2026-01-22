@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Header } from './Header';
 import { Bell, Briefcase, MessageSquare, Calendar, CheckCheck, Trash2, Settings } from 'lucide-react';
+import { Seo } from './Seo';
 
 interface Notification {
   id: string;
@@ -99,6 +100,7 @@ export function NotificationsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Notifications" noindex description="Private notifications page for the signed in user." />
       <Header />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

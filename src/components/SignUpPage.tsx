@@ -1,49 +1,46 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Briefcase, Mail, Lock, User, ArrowLeft } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 type UserType = 'seeker' | 'provider';
 
 export function SignUpPage() {
   const navigate = useNavigate();
-  const { signUp, loading } = useAuth();
+  const { signup } = useApp();
   const [userType, setUserType] = useState<UserType>('seeker');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (password !== confirmPassword) {
       toast.error('Passwords do not match!');
       return;
     }
-
+    
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters');
       return;
     }
 
-    // map UI provider -> 'employer' role used in profiles
-    const role = userType === 'provider' ? 'employer' : 'seeker';
-
-    const { data, error } = await signUp(email, password, fullName, role);
-    if (error) {
+    const success = signup(fullName, email, password, userType);
+    if (success) {
+      toast.success('Account created successfully!');
+      navigate(userType === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider');
+    } else {
       toast.error('Sign up failed. Please try again.');
-      console.error(error);
-      return;
     }
-
-    toast.success('Account created successfully!');
-    navigate(userType === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider');
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 py-12">
+      <Seo title="Sign Up" description="Create a CareerSpark account to apply for jobs, save favorites, and get matched with relevant roles." />
       <div className="max-w-md w-full">
         {/* Back to Home */}
         <Link

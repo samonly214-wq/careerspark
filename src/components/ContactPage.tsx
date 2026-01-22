@@ -2,6 +2,7 @@ import { Header } from './Header';
 import { Mail, Phone, MapPin, Send, Briefcase, MessageSquare, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function ContactPage() {
   const [formData, setFormData] = useState({
@@ -62,6 +63,7 @@ export function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Contact" description="Get in touch with CareerSpark — support, sales, partnerships and more." />
       <Header />
 
       {/* Hero Section */}

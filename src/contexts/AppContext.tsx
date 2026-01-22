@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { useAuth } from './AuthContext';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Job {
   id: string;
@@ -42,9 +41,9 @@ export interface User {
 
 interface AppContextType {
   user: User | null;
-  login: (email: string, password: string, type: 'seeker' | 'provider') => Promise<boolean>;
-  signup: (name: string, email: string, password: string, type: 'seeker' | 'provider') => Promise<boolean>;
-  logout: () => Promise<void>;
+  login: (email: string, password: string, type: 'seeker' | 'provider') => boolean;
+  signup: (name: string, email: string, password: string, type: 'seeker' | 'provider') => boolean;
+  logout: () => void;
   savedJobs: string[];
   toggleSaveJob: (jobId: string) => void;
   applications: Application[];
@@ -257,39 +256,36 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [savedJobs, setSavedJobs] = useState<string[]>([]);
   const [applications, setApplications] = useState<Application[]>([]);
   const [jobs, setJobs] = useState<Job[]>(mockJobs);
-  const auth = useAuth();
 
-  // Keep local `user` in sync with auth context (profile + user)
-  useEffect(() => {
-    const u = auth.user;
-    const p = auth.profile;
-    if (u) {
+  const login = (email: string, password: string, type: 'seeker' | 'provider'): boolean => {
+    // Mock login - in real app, this would call an API
+    if (email && password.length >= 6) {
       setUser({
-        id: u.id,
-        name: p?.full_name ?? u.email?.split('@')[0] ?? '',
-        email: u.email ?? p?.email ?? '',
-        type: p?.role === 'employer' ? 'provider' : 'seeker',
-        avatar: p?.avatar_url ?? undefined,
-        company: undefined,
+        id: Math.random().toString(36).substr(2, 9),
+        name: email.split('@')[0],
+        email,
+        type,
       });
-    } else {
-      setUser(null);
+      return true;
     }
-  }, [auth.user, auth.profile]);
-
-  const login = async (email: string, password: string, type: 'seeker' | 'provider'): Promise<boolean> => {
-    const { error } = await auth.signIn(email, password);
-    return !error;
+    return false;
   };
 
-  const signup = async (name: string, email: string, password: string, type: 'seeker' | 'provider'): Promise<boolean> => {
-    const role = type === 'provider' ? 'employer' : 'seeker';
-    const { error } = await auth.signUp(email, password, name, role);
-    return !error;
+  const signup = (name: string, email: string, password: string, type: 'seeker' | 'provider'): boolean => {
+    // Mock signup - in real app, this would call an API
+    if (name && email && password.length >= 6) {
+      setUser({
+        id: Math.random().toString(36).substr(2, 9),
+        name,
+        email,
+        type,
+      });
+      return true;
+    }
+    return false;
   };
 
-  const logout = async (): Promise<void> => {
-    await auth.signOut();
+  const logout = () => {
     setUser(null);
     setSavedJobs([]);
     setApplications([]);

@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function PostJobPage() {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ export function PostJobPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Post a Job" noindex description="Private page for employers to post new job openings." />
       <Header />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

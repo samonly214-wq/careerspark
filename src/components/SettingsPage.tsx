@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Header } from './Header';
 import { User, Lock, Bell, Mail, Globe, CreditCard, Shield, Eye } from 'lucide-react';
+import { Seo } from './Seo';
 
 export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<'profile' | 'account' | 'notifications' | 'privacy' | 'billing'>('profile');
@@ -15,6 +16,7 @@ export function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Settings" noindex description="Account settings and preferences. Private page requiring authentication." />
       <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

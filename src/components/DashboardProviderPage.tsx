@@ -4,6 +4,7 @@ import { Briefcase, Users, Eye, TrendingUp, PlusCircle, Trash2 } from 'lucide-re
 import { Link } from 'react-router-dom';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function DashboardProviderPage() {
   const { jobs, deleteJob, applications } = useApp();
@@ -27,6 +28,7 @@ export function DashboardProviderPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Employer Dashboard" noindex description="Employer dashboard — private area for managing job postings and candidates." />
       <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

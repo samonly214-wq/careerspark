@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Header } from './Header';
 import { useApp } from '../contexts/AppContext';
 import { toast } from 'sonner';
+import { Seo } from './Seo';
 
 export function BrowseJobsPage() {
   const { jobs, savedJobs, toggleSaveJob } = useApp();
@@ -35,6 +36,7 @@ export function BrowseJobsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Seo title="Browse Jobs" description="Browse and filter thousands of job listings to find the right role for you." />
       <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

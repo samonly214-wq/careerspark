@@ -1,32 +1,18 @@
 import { Link } from 'react-router-dom';
-import { Briefcase, Menu, X, User as UserIcon, LogOut, Bell } from 'lucide-react';
+import { Briefcase, Menu, X, User, LogOut, Bell } from 'lucide-react';
 import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useApp } from '../contexts/AppContext';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, profile, signOut } = useAuth();
+  const { user, logout } = useApp();
 
   return (
     <header className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            {/* Use branding image if available at /branding-logo.png, otherwise fall back to icon */}
-            <img
-              src="/branding-logo.png"
-              alt="CareerSpark"
-              onError={(e) => {
-                // hide image if not present and let the icon render
-                (e.target as HTMLImageElement).style.display = 'none';
-                const el = document.getElementById('cs-badge-fallback');
-                if (el) el.style.display = 'inline-flex';
-              }}
-              className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-            />
-            <span id="cs-badge-fallback" className="inline-flex items-center">
-              <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
-            </span>
+            <Briefcase className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
             <span className="text-xl sm:text-2xl font-bold italic">CareerSpark</span>
           </Link>
           
@@ -37,7 +23,7 @@ export function Header() {
             </Link>
             {user ? (
               <>
-                <Link to={profile?.role === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider'} className="hover:text-orange-500 transition-colors">
+                <Link to={user.type === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider'} className="hover:text-orange-500 transition-colors">
                   Dashboard
                 </Link>
                 <Link to="/messages" className="hover:text-orange-500 transition-colors">
@@ -48,11 +34,11 @@ export function Header() {
                 </Link>
                 <div className="flex items-center gap-3">
                   <Link to="/settings" className="flex items-center gap-2 hover:text-orange-500 transition-colors">
-                    <UserIcon className="w-5 h-5" />
-                    <span>{profile?.full_name ?? user?.email ?? 'Account'}</span>
+                    <User className="w-5 h-5" />
+                    <span>{user.name}</span>
                   </Link>
                   <button
-                    onClick={signOut}
+                    onClick={logout}
                     className="flex items-center gap-2 px-4 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white transition-colors"
                   >
                     <LogOut className="w-4 h-4" />
@@ -104,7 +90,7 @@ export function Header() {
             {user ? (
               <>
                 <Link
-                  to={profile?.role === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider'}
+                  to={user.type === 'seeker' ? '/dashboard-seeker' : '/dashboard-provider'}
                   className="block hover:text-orange-500 transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -129,11 +115,11 @@ export function Header() {
                   className="block hover:text-orange-500 transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Settings ({profile?.full_name ?? user?.email ?? 'Account'})
+                  Settings ({user.name})
                 </Link>
                 <button
                   onClick={() => {
-                    signOut();
+                    logout();
                     setMobileMenuOpen(false);
                   }}
                   className="w-full text-left px-4 py-2 border border-orange-500 text-orange-500 rounded hover:bg-orange-500 hover:text-white transition-colors"
