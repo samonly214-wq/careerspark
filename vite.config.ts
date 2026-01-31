@@ -5,13 +5,17 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    // common extensions and single project alias
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
   },
   build: {
     target: 'esnext',
-    outDir: 'dist', // ensure Vercel finds this folder after build
+    outDir: 'dist', // Vercel expects "dist" by default (or set this in project settings)
+    sourcemap: false,
+    minify: 'esbuild',
   },
   server: {
     port: 3000,
